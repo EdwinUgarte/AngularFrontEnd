@@ -9,10 +9,11 @@ import { DirectivaComponent } from './components/directiva/directiva.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { ClienteService } from './components/clientes/cliente.service';
 import { RouterModule, Routes } from '@angular/router';
-import { InicioComponent } from './inicio/inicio.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormComponent } from './components/clientes/form.component';
 import { FormsModule } from '@angular/forms';
+import { HeroComponent } from './components/hero/hero.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
     ClientesComponent,
     InicioComponent,
     FormComponent,
+    HeroComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,14 +11,19 @@ import { ClienteService } from './cliente.service';
   styleUrls: ['./clientes.component.css']
 })
 export class ClientesComponent implements OnInit {
+  
 
   listaClientes: Cliente[];//!Creamos un atributo del tipo de la clase Cliente y va a ser un arreglo
   constructor(private clienteService: ClienteService, private router: Router,) { }//!Declaramos un atributo en el constructor del tipo de la clase Service la cual estamos inyectando
 
+  
   ngOnInit(): void {
+    
   this.clienteService.getClientes().subscribe(//!mandamos llamar el metodo .getClientes() y con .suscribe iniciamos el Observable 
-    clientes => this.listaClientes = clientes//!esta funcion le asigna el valor de clientes a listaClientes
+    clientes => this.listaClientes = clientes, //!esta funcion le asigna el valor de clientes a listaCliente
   );
+
+
   }
 
   delete(cliente: Cliente): void {
@@ -40,5 +45,6 @@ export class ClientesComponent implements OnInit {
       }
     })
   }
+
 }
 

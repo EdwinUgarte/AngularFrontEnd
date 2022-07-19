@@ -36,7 +36,7 @@
     <p style="font-size: 20px; font-weight: 1px; color: rgb(9, 14, 90)">
       {{ titulo }}
     </p>
-    <form>
+    <form #clientForm="ngForm">
       <!--! ngSubmit indica que metodo se va a usar-->
       <div class="form-group p-2">
         <label for="nombre" class="col-form-label">Nombre</label>
@@ -46,7 +46,18 @@
             class="form-control"
             [(ngModel)]="cliente.nombre"
             name="nombre"
+            required
+            minlength="4"
+            #nombreError="ngModel"
           />
+          <div style="padding-top: 2px; color: red; height: 5px;" *ngIf="nombreError.invalid && (nombreError.dirty || nombreError.touched)">
+            <div *ngIf="nombreError.errors.required">
+              Nombre Requerido
+            </div>
+            <div *ngIf="nombreError.errors.minlength">
+              El nombre debe tener al menos 4 caracteres
+            </div>
+          </div>
           <!--? [(ngModel)] esta opcion nos ayuda a asignar lo que ingresa el usuario a propiedades del objeto, estilo cliente.setNombre("edwin") -->
         </div>
       </div>
@@ -58,18 +69,37 @@
             class="form-control"
             [(ngModel)]="cliente.apellido"
             name="apellido"
+            required
+            minlength="4"
+            #apellidoError="ngModel"
           />
+          <div style="padding-top: 2px; color: red; height: 5px;" *ngIf="apellidoError.invalid && (apellidoError.dirty || apellidoError.touched)">
+            <div *ngIf="nombreError.errors.required">
+              Apellido Requerido
+            </div>
+            <div *ngIf="nombreError.errors.minlength">
+              El apellido debe tener al menos 4 caracteres
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group p-2">
         <label for="email" class="col-form-label col-sm-2">E-Mail</label>
         <div>
           <input
-            type="text"
+            type="email"
             class="form-control"
             [(ngModel)]="cliente.email"
             name="email"
+            required
+            email
+            #emailError="ngModel"
           />
+          <div style="padding-top: 2px; color: red; height: 5px;" *ngIf="emailError.invalid && (emailError.dirty || emailError.touched)">
+            <div *ngIf="emailError.errors.email">
+             Email debe tener un formato valido
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group p-2">
@@ -78,16 +108,13 @@
             class="btn btn-primary"
             role="button"
             (click)="create()"
-            *ngIf="!cliente.id else elseBlock"
+            [disabled]="!clientForm.form.valid"
+            *ngIf="!cliente.id; else elseBlock"
           >
             Guardar
           </button>
           <ng-template #elseBlock
-            ><button
-              class="btn btn-primary"
-              role="button"
-              (click)="update()"
-            >
+            ><button class="btn btn-primary" role="button" (click)="update()" [disabled]="!clientForm.form.valid">
               Actualizar
             </button>
           </ng-template>

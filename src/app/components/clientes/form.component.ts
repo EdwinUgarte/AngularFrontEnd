@@ -24,12 +24,12 @@ export class FormComponent implements OnInit {
   }
 
   public create(): void {
-    this.clienteService.create(this.cliente).subscribe((cliente) => {
+    this.clienteService.create(this.cliente).subscribe((json) => {
       //!Aqui le estamos dando los valores registrados al objeto, si los leemos de nuevo ya estaran asignados como en la alerta de abajo
       this.router.navigate(['/clientes']);
       Swal.fire(
         'Cliente Guardado',
-        `El cliente ${cliente.nombre} ${cliente.apellido} se registro con exito`,
+        `El cliente ${json.cliente.nombre} ${json.cliente.apellido} se registro con exito`,
         'success'
       );
     });
@@ -47,14 +47,13 @@ export class FormComponent implements OnInit {
   }
 
   update(): void {
-    this.clienteService.update(this.cliente).subscribe((cliente) => {
+    this.clienteService.update(this.cliente).subscribe((json) => {
       this.router.navigate(['/clientes']);
       Swal.fire(
-        `${cliente.nombre} Actualizado`,
+        `${json.cliente.nombre} Actualizado`,
         'Cliente actualizado con exito',
         'success'
       );
     });
   }
-
 }

@@ -2,13 +2,11 @@
   @media screen and (min-width: 700px) {
     div.divCard {
       width: 40%;
-    
     }
   }
   @media screen and (max-width: 700px) {
     div.divCard {
       width: 100%;
-    
     }
   }
   div.divCard {
@@ -19,22 +17,68 @@
     color: rgb(20, 20, 102);
   }
 </style>
-<h1 class="mt-3">Clientes:</h1>
-<div>
-  <button class="btn btn-primary btn-rounded" type="button" routerLink="/clientes/form">Agregar Cliente</button>
+<div *ngIf="!listaClientes" style="height: 100vh">
+  <div class="card border-danger" style="padding: 10px; margin: 10px">
+    <div class="card-header">Error en la conexión de servicio</div>
+    <div class="card-body">
+      <h5 class="card-title">Realiza la conexión con el servidor</h5>
+      <p class="card-text">Ponte en contacto con el servicio tecnico</p>
+      <a routerLink="/home" class="btn btn-primary">ir a Inicio</a>
+    </div>
+  </div>
 </div>
+
+<div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+  <h1 class="mt-3">Clientes:</h1>
+  <div>
+    <button
+      class="btn btn-primary btn-rounded"
+      type="button"
+      routerLink="/clientes/form"
+    >
+      Agregar Cliente
+    </button>
+  </div>
+</div>
+
 <div class="d-flex flex-wrap justify-content-center">
   <div class="divCard" *ngFor="let cliente of listaClientes">
-    <img src="/assets/images/icono.png" alt="icono" style="max-width: 40px;">
-    <div style="font-size:18px;">Cliente {{cliente.id}}</div>
+    <img src="/assets/images/icono.png" alt="icono" style="max-width: 40px" />
+    <div style="font-size: 18px">Cliente {{ cliente.id }}</div>
     <div class="card-body">
       <h2 class="card-title">{{ cliente.nombre + " " + cliente.apellido }}</h2>
       <p class="card-text">{{ cliente.email }}</p>
       <p class="card-text">{{ cliente.createAt }}</p>
-      <div style="display: flex; justify-content: space-between; width: 100%;">
-      <button type="button" [routerLink]="['/clientes/form', cliente.id]" style="background-color: rgb(0, 110, 255); padding: 5px; color: white; border-radius: 5px; border: none; width: 70px;">Editar</button>
-      <button type="button" style="background-color: red;padding: 5px; color: white; border-radius: 5px; border: none; width: 70px;" (click)="delete(cliente)">Eliminar</button>
-    </div>
+      <div style="display: flex; justify-content: space-between; width: 100%">
+        <button
+          type="button"
+          [routerLink]="['/clientes/form', cliente.id]"
+          style="
+            background-color: rgb(0, 110, 255);
+            padding: 5px;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            width: 70px;
+          "
+        >
+          Editar
+        </button>
+        <button
+          type="button"
+          style="
+            background-color: red;
+            padding: 5px;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            width: 70px;
+          "
+          (click)="delete(cliente)"
+        >
+          Eliminar
+        </button>
+      </div>
     </div>
   </div>
 </div>
