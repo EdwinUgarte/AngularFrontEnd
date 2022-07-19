@@ -1,0 +1,98 @@
+<style>
+  @media screen and (min-width: 700px) {
+    div.divContainer {
+      width: 50%;
+      height: 40%;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    div.divContainer {
+      width: 100%;
+      height: 50%;
+    }
+  }
+  @media screen and (max-height: 700px) {
+    div.divContainer {
+      width: 100%;
+      height: 70%;
+    }
+  }
+</style>
+
+<div
+  style="
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+  "
+>
+  <div
+    class="divContainer"
+    style="padding: 10px; border-radius: 10px; border: 2px solid rgb(9, 14, 90)"
+  >
+    <p style="font-size: 20px; font-weight: 1px; color: rgb(9, 14, 90)">
+      {{ titulo }}
+    </p>
+    <form>
+      <!--! ngSubmit indica que metodo se va a usar-->
+      <div class="form-group p-2">
+        <label for="nombre" class="col-form-label">Nombre</label>
+        <div>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.nombre"
+            name="nombre"
+          />
+          <!--? [(ngModel)] esta opcion nos ayuda a asignar lo que ingresa el usuario a propiedades del objeto, estilo cliente.setNombre("edwin") -->
+        </div>
+      </div>
+      <div class="form-group p-2">
+        <label for="apellido" class="col-form-label col-sm-2">Apellido</label>
+        <div>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.apellido"
+            name="apellido"
+          />
+        </div>
+      </div>
+      <div class="form-group p-2">
+        <label for="email" class="col-form-label col-sm-2">E-Mail</label>
+        <div>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cliente.email"
+            name="email"
+          />
+        </div>
+      </div>
+      <div class="form-group p-2">
+        <div>
+          <button
+            class="btn btn-primary"
+            role="button"
+            (click)="create()"
+            *ngIf="!cliente.id else elseBlock"
+          >
+            Guardar
+          </button>
+          <ng-template #elseBlock
+            ><button
+              class="btn btn-primary"
+              role="button"
+              (click)="update()"
+            >
+              Actualizar
+            </button>
+          </ng-template>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
